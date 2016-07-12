@@ -1,0 +1,1 @@
+module.exports = require("bower:angular-utils-ui-breadcrumbs@0.2.2/uiBreadcrumbs.js");

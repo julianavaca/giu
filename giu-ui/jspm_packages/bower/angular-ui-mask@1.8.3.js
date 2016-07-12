@@ -1,0 +1,1 @@
+module.exports = require("bower:angular-ui-mask@1.8.3/dist/mask.js");

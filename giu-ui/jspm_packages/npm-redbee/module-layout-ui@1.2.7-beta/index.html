@@ -1,0 +1,69 @@
+<!doctype html>
+<html>
+<head>
+  <meta charset="iso-8859-1">
+  <title>Example layout</title>
+</head>
+
+<style type="text/css">
+  .splash {
+    display: none;
+  }
+  [ng-cloak] {
+    display: none !important;
+  }
+  [ng-cloak].splash {
+    display: block !important;
+  }
+  .splash {
+    position: absolute;
+    top: 0;
+    left: 0;
+    height:100%;
+    width:100%;
+    filter: alpha(opacity=60);
+    opacity: 0.6;
+    background: #000;
+  }
+  .splash h2 {
+    text-align: center;
+    font-size: 4em;
+    color:white;
+    position: relative;
+    top: 50%;
+    transform: translateY(-50%);
+    font-family: Roboto;
+  }
+</style>
+
+<body>
+
+  <div class="splash" ng-cloak>
+    <h2 style="font-family: Roboto;">Loading</h2>
+  </div>
+
+  <div ng-cloak>
+  <al-main-header title="Example title"></al-main-header>
+  <al-action-menu></al-action-menu>
+    <!--<bootstrap-dir></bootstrap-dir>-->
+    <!--<div layout="column" flex>-->
+      <!--<section id="content">-->
+        <!--<div class="container">-->
+          <!--<ui-breadcrumbs displayname-property="data.displayName"-->
+                          <!--template-url="/modules/menu/views/menu.breadcrumb.tpl.html">-->
+          <!--</ui-breadcrumbs>-->
+        <!--</div>-->
+      <!--</section>-->
+    <!--</div>-->
+  </div>
+
+  <script src="jspm_packages/system.js"></script>
+  <script src="config.js"></script>
+
+  <script>
+    System.import('app/app.test');
+  </script>
+
+</body>
+
+</html>

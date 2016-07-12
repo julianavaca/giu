@@ -1,0 +1,7 @@
+spring:
+  application:
+    name: aleph-media
+  cloud:
+    config:
+      env: test
+      uri: http://localhost:18190/aleph-cloud-config/config

@@ -1,0 +1,26 @@
+<section id="content" class="">
+
+  <md-card>
+    <div class="form-fullpage card" layout="column" layout-margin flex>
+
+      <div ng-cloak>
+        <md-content>
+          <md-tabs md-dynamic-height md-border-bottom md-selected="vm.activeTab">
+            <md-tab label="{{ 'search.form.material.sectionTitle' | translate}}">
+              <!-- vista de buscador material -->
+              <div ui-view="search-material"></div>
+            </md-tab>
+            <!--MEDIA TAB-->
+            <md-tab label="{{ 'search.form.media.sectionTitle' | translate}}">
+              <!-- vista de buscador media -->
+              <div ui-view="search-media"></div>
+            </md-tab>
+          </md-tabs>
+        </md-content>
+      </div>
+    </div>
+  </md-card>
+</section>
+
+
+

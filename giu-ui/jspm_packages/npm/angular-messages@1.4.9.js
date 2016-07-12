@@ -1,0 +1,1 @@
+module.exports = require("npm:angular-messages@1.4.9/index.js");

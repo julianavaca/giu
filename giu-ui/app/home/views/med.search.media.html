@@ -1,0 +1,214 @@
+<div class="form-fullpage card" layout="column" layout-margin flex>
+  <div class="form-body" style="overflow: hidden; outline: none;">
+    <form name="form" novalidate>
+      <label>{{ 'search.form.media.sectionTitle' | translate}}</label>
+      <access roles="MMMU" class="ng-isolate-scope">
+        <a class="btn btn-default waves-effect icon-left"
+           ui-sref="newMedia">{{'search.form.media.create'|translate}}</a>
+      </access>
+      <div class="search-query-block" layout="row" layout-padding="10">
+        <div flex="25">
+          <md-input-container>
+            <label>{{'search.form.media.number' | translate}}</label>
+            <input type="text" ng-model="vm.entity.mediaId" tabindex="0"/>
+          </md-input-container>
+        </div>
+        <div flex="25">
+          <lay-autocomplete
+            endpoint="mediaFormatResource"
+            is-cached="false"
+            input-name="Format"
+            label="{{'search.form.media.format' | translate}}"
+            item-selected="vm.entity.mediaFormat"
+            expression="vm.expression"
+            condition="vm.condition"
+            query="vm.queryFormat">
+          </lay-autocomplete>
+        </div>
+        <div flex="25">
+          <lay-autocomplete
+            endpoint="mediaTypeResource"
+            is-cached="false"
+            input-name="Type"
+            label="{{'search.form.media.type' | translate}}"
+            item-selected="vm.entity.mediaType"
+            expression="vm.expression"
+            condition="vm.condition"
+            query="vm.queryType">
+          </lay-autocomplete>
+        </div>
+        <div flex="25">
+          <md-input-container class="md-block">
+            <label>{{'search.form.media.cid' | translate}}</label>
+
+            <input type="text" ng-model="vm.entity.cid"/>
+          </md-input-container>
+        </div>
+      </div>
+      <div class="search-query-block" layout="row" layout-padding="10">
+        <div flex="25">
+          <lay-autocomplete
+            endpoint="users"
+            is-cached="false"
+            input-name="createdBy"
+            label="{{'search.form.material.created.by' | translate}}"
+            item-selected="vm.entity.createdBy"
+            expression="vm.expressionCreateBy"
+            condition="vm.conditionCreateBy"
+            query="vm.queryCreateBy">
+          </lay-autocomplete>
+        </div>
+        <div flex="25">
+          <label>{{'search.form.material.created.on.from' | translate}}</label>
+          <div class="date-picker input-group" ng-class="{ 'is-opened': vm.startDateOpenFrom }">
+            <div class="fg-line" ng-class="{ 'fg-toggled': opened == true }">
+              <input type="date"
+                     class="form-control background-none"
+                     ng-change="vm.checkValidDates()"
+                     ng-model="vm.entity.createdOnFrom">
+            </div>
+          </div>
+        </div>
+        <div flex="25">
+          <label>{{'search.form.material.created.on.to' | translate}}</label>
+          <div class="date-picker input-group" ng-class="{ 'is-opened': vm.startDateOpenTo }">
+            <div class="fg-line" ng-class="{ 'fg-toggled': opened == true }">
+              <input type="date"
+                     class="form-control background-none"
+                     datepicker-popup
+                     show-button-bar="false"
+                     ng-change="vm.checkValidDates()"
+                     ng-model="vm.entity.createdOnTo">
+            </div>
+            <div>
+              <div class="error-message" ng-hide="vm.checkDateValidity(vm.entity.createdOnFrom, vm.entity.createdOnTo)">
+                Date must come after the Creation From date.
+              </div>
+            </div>
+          </div>
+        </div>
+        <div flex="25">
+          <md-input-container class="md-block">
+            <media-select-directive
+              labeldir="'Media Status'"
+              format-dir="vm.entity.mediaStatus"
+              ng-init="vm.entity.mediaStatus = 'V'"
+              format-resource-dir="[{id:'V', description: 'ACTIVE'}, {id:'A', description: 'ANULLED'}]">
+            </media-select-directive>
+          </md-input-container>
+        </div>
+      </div>
+      <div class="search-query-block" layout="row" layout-padding="10">
+        <div flex="25">
+          <lay-autocomplete
+            endpoint="networkResource"
+            is-cached="false"
+            input-name="network"
+            label="{{'search.form.material.network' | translate}}"
+            item-selected="vm.entity.network"
+            expression="vm.expression"
+            selected-item-change="vm.updateFeeds"
+            model="vm"
+            condition="vm.condition"
+            query="vm.queryNetwork">
+          </lay-autocomplete>
+        </div>
+        <div flex="25">
+          <lay-autocomplete
+            endpoint="feeds"
+            is-cached="false"
+            params="vm.paramFeed"
+            input-name="feed"
+            label="{{'search.form.material.feed' | translate}}"
+            item-selected="vm.entity.feed"
+            expression="vm.expression"
+            condition="vm.condition"
+            query="vm.queryFeed">
+          </lay-autocomplete>
+        </div>
+      </div>
+      <label>{{ 'search.form.material.sectionTitle' | translate}}</label>
+      <div class="search-query-block" layout="row" layout-padding="10">
+        <div flex="25">
+          <md-input-container>
+            <label>{{'search.form.material.number' | translate}}</label>
+            <input type="text" ng-model="vm.entity.materialId"/>
+          </md-input-container>
+        </div>
+        <div flex="25">
+          <md-input-container>
+            <label>{{'search.form.material.title' | translate}}</label>
+            <input type="text" ng-model="vm.entity.materialTitle"/>
+          </md-input-container>
+        </div>
+        <div flex="25">
+          <lay-autocomplete
+            endpoint="materialTypesResource"
+            is-cached="false"
+            input-name="materialType"
+            label="{{'search.form.material.type' | translate}}"
+            item-selected="vm.entity.materialType"
+            expression="vm.expression"
+            condition="vm.condition"
+            query="vm.queryMaterialType">
+          </lay-autocomplete>
+        </div>
+        <div flex="25">
+          <access roles="PRVM">
+            <md-input-container class="md-block">
+              <media-select-directive
+                labeldir="'search.form.material.material.status' | translate"
+                format-dir="vm.entity.mediaMaterialStatus"
+                ng-init="vm.entity.mediaMaterialStatus = 'V'"
+                format-resource-dir="[{id:'V', description: 'ACTIVE'}, {id:'A', description: 'ANULLED'}]">
+              </media-select-directive>
+            </md-input-container>
+          </access>
+        </div>
+      </div>
+      <div class="search-query-block" layout="row" layout-padding="10">
+        <div flex="25">
+          <md-input-container class="md-block">
+            <label ng-disabled="!vm.entity.materialId">{{'search.form.material.chapter.from' | translate}}</label>
+            <input ng-disabled="!vm.entity.materialId" type="text" ng-model="vm.entity.fromChapter"
+                   ng-change="vm.checkChapterValidity(vm.entity.fromChapter, vm.entity.toChapter);vm.updateChapterTo();"/>
+            <div class="error-message" ng-hide="vm.checkChapterValidity(vm.entity.fromChapter, vm.entity.toChapter)">
+              Chapter from must be lesser than chapter to.
+            </div>
+          </md-input-container>
+        </div>
+        <div flex="25">
+          <md-input-container class="md-block">
+            <label ng-disabled="!vm.entity.materialId">{{'search.form.material.chapter.to' | translate}}</label>
+            <input ng-disabled="!vm.entity.materialId" type="text" ng-model="vm.entity.toChapter"
+                   ng-change="vm.checkChapterValidity(vm.entity.fromChapter, vm.entity.toChapter)"/>
+            <div class="error-message" ng-hide="vm.checkChapterValidity(vm.entity.fromChapter, vm.entity.toChapter)">
+              Chapter to must be greater  than chapter from.
+            </div>
+          </md-input-container>
+        </div>
+        <div flex="25">
+          <md-input-container>
+            <label>{{'search.form.material.chapter.title' | translate}}</label>
+            <input type="text" ng-model="vm.entity.chapterTitle"/>
+          </md-input-container>
+        </div>
+        <div flex="25">
+          <md-input-container class="md-block">
+            <label ng-disabled="!vm.entity.materialId">{{'search.form.material.episode.number' | translate}}</label>
+            <input ng-disabled="!vm.entity.materialId" type="text" ng-model="vm.entity.episodeId"/>
+          </md-input-container>
+        </div>
+      </div>
+      <div class="search-query-block" layout="row" layout-align="end" layout-padding="10">
+        <div flex="25" class="form-buttons fg-line">
+          <md-button ng-click="vm.makeSearch()" class="md-raised md-primary bgm-blue">
+            {{'search.form.submit'|translate}}
+          </md-button>
+          <a class="m-l-10" ng-click="vm.clearForm()">{{'search.form.clear'|translate}}</a>
+        </div>
+      </div>
+    </form>
+  </div>
+  <!-- form-body -->
+</div>
