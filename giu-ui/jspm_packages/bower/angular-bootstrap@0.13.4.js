@@ -1,1 +1,0 @@
-module.exports = require("bower:angular-bootstrap@0.13.4/ui-bootstrap-tpls.js");

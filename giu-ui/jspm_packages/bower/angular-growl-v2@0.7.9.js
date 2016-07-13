@@ -1,1 +1,0 @@
-module.exports = require("bower:angular-growl-v2@0.7.9/build/angular-growl.js");

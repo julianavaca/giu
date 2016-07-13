@@ -1,1 +1,0 @@
-module.exports = require("bower:bootstrap-sweetalert@0.4.5/lib/sweet-alert.js");

@@ -1,1 +1,0 @@
-module.exports = require("bower:material-design-iconic-font@2.1.2/./dist/css/*.min.css!css");

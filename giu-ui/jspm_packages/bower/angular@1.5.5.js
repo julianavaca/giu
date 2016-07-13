@@ -1,1 +1,0 @@
-module.exports = require("bower:angular@1.5.5/angular.js");
