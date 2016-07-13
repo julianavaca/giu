@@ -1,1 +1,0 @@
-angular.module("giu-ui-templates",[]).run(["$templateCache",function(e){e.put("home/views/med.search.html","<div class=panel>hola Mundo</div>")}]);
