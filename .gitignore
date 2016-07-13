@@ -1,0 +1,9 @@
+gui-ui/node_modules
+gui-ui/bower_components
+gui-ui/dist
+
+/.idea
+.DS_STORE
+coverage
+jspm_packages
+*.iml

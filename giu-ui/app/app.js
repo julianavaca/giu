@@ -4,29 +4,20 @@
 import angular from 'angular';
 import 'angular-resource';
 import 'angular-ui-router';
-import 'angular-material';
 import 'angular-messages';
 import 'angular-ui-mask';
-
-import 'module-security-ui/app/scripts/sec.module.js';
 import 'bower:angular-bootstrap@0.13.4';
 
-import HttpRequestService from './home/scripts/services/med.http.request.srv.js';
-import dashboardApiCfg from './scripts/config/dashboard.api.cfg';
 import mediaroutes from './scripts/config/med.router.cfg';
-import financeOAuthCfg from './scripts/config/med.oauth.cfg.js';
 
-import homeFilters from './home/scripts/filters/med.home.filt.js';
 
 import './templates';
 
-var app = angular.module('media.app',
+var app = angular.module('giu-ui.app',
   [
+      ,
     'ui.router',
-    'security.module',
-    'ngMaterial',
-    'aleph-media-ui-templates',
-    'homeFilters',
+    'giu-ui-templates',
     'ngMessages',
     'ui.mask'
   ]);
@@ -40,20 +31,10 @@ System.import('jquery').then(function () {
   });
 });
 
-app.run((OAuthToken, $location) => {
-
-  let token = $location.path().substr(1);
-  if(typeof token !== 'undefined' && token !== '' && token.indexOf('access_token')===0 ){
-    OAuthToken.setToken(token);
-  }
-});
-
 app
-  .config(financeOAuthCfg())
-  .config(mediaroutes())
-  .config(dashboardApiCfg())
+  .config(mediaroutes());
 
-  .service('httpRequestService', HttpRequestService)
+app.run();
 
 
 export default app;

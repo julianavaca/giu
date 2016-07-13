@@ -1,7 +1,7 @@
 {
-  "name": "aleph-media-ui",
+  "name": "giu-ui",
   "version": "1.0.0",
-  "description": "aleph-media-ui",
+  "description": "",
   "main": "app/app.js",
   "scripts": {
     "postinstall": "sh configure.sh"
@@ -27,7 +27,6 @@
       "angular": "github:angular/bower-angular@1.4.5",
       "angular-bootstrap": "bower:angular-bootstrap@0.13.4",
       "angular-encode-uri": "bower:angular-encode-uri@^1.0.0",
-      "angular-material": "github:angular/bower-material@0.10.1",
       "angular-messages": "npm:angular-messages@^1.4.9",
       "angular-resource": "github:angular/bower-angular-resource@1.4.5",
       "angular-route": "github:angular/bower-angular-route@1.4.5",
@@ -36,9 +35,6 @@
       "clean-css": "npm:clean-css@3.4.1",
       "css": "github:systemjs/plugin-css@0.1.15",
       "jquery": "github:components/jquery@2.1.4",
-      "module-crud-ui": "npm-redbee:module-crud-ui@1.2.5-beta",
-      "module-layout-ui": "npm-redbee:module-layout-ui@1.2.7-beta",
-      "module-security-ui": "npm-redbee:module-security-ui@1.0.1",
       "remarkable-bootstrap-notify": "bower:remarkable-bootstrap-notify@^3.1.3"
     },
     "devDependencies": {
@@ -48,7 +44,7 @@
     }
   },
   "publishConfig": {
-    "registry": "http://argalephdockerd2:8081/content/repositories/npm-redbee"
+    "registry": "  "
   },
   "devDependencies": {
     "babel-core": "^5.8.22",
