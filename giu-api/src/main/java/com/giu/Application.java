@@ -1,7 +1,7 @@
-package com.turner;
+package com.giu;
 
-import com.turner.configuration.MethodSecurityConfig;
-import com.turner.configuration.OAuth2ResourceServerConfig;
+import com.giu.configuration.MethodSecurityConfig;
+import com.giu.configuration.OAuth2ResourceServerConfig;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.Import;
@@ -16,7 +16,6 @@ import org.springframework.security.config.annotation.web.configuration.EnableWe
 @EnableWebSecurity
 @EnableGlobalMethodSecurity(prePostEnabled = true, proxyTargetClass = true)
 @Import({OAuth2ResourceServerConfig.class, MethodSecurityConfig.class})
-@ImportResource(value = "classpath:aop-config.xml")
 public class Application {
 
     public static void main(String[] args) {

@@ -7,7 +7,7 @@ subprojects {
     apply plugin: 'maven'
 
     ext {
-        springBootVersion = '1.3.3.RELEASE'
+        springBootVersion = '1.3.6.RELEASE'
         springVersion='4.2.5.RELEASE'
         nexusUser = "admin"
         nexusPassword = "R3dB33575"
@@ -60,18 +60,18 @@ subprojects {
         compile "org.springframework:spring-aspects:${springVersion}"
     }
 
-    sonarRunner {
-        sonarProperties {
-            property "sonar.sourceEncoding", "UTF-8"
-            property "sonar.exclusions", "src/main/java/com/turner/configuration/*.java, " +
-                    "**/Application.java, " +
-                    "src/main/java/com/turner/domain/*.java, " +
-                    "src/main/java/io/redbee/rest/template/model/*.java, " +
-                    "src/main/java/com/turner/sp/**/*.java"
-        }
-    }
+   //sonarRunner {
+     //   sonarProperties {
+       //     property "sonar.sourceEncoding", "UTF-8"
+         //   property "sonar.exclusions", "src/main/java/com/turner/configuration/*.java, " +
+           //         "**/Application.java, " +
+             //       "src/main/java/com/turner/domain/*.java, " +
+               //     "src/main/java/io/redbee/rest/template/model/*.java, " +
+                 //   "src/main/java/com/turner/sp/**/*.java"
+        //}
+    //}
 
-    group = 'com.turner.aleph'
+    group = 'com.giu'
 
     uploadArchives {
         repositories {
@@ -101,12 +101,12 @@ repositories {
     jcenter()
 }
 
-sonarRunner {
-    sonarProperties {
-        property 'sonar.host.url', 'http://argalephdockerci2:9997'
-        property 'sonar.jdbc.url', 'jdbc:mysql://argalephdockerci2:3307/sonar'
-        property 'sonar.jdbc.driverClassName', 'com.mysql.jdbc.Driver'
-        property 'sonar.jdbc.username', 'sonar'
-        property 'sonar.jdbc.password', '123qwe'
-    }
-}
+//sonarRunner {
+  //  sonarProperties {
+    //    property 'sonar.host.url', 'http://argalephdockerci2:9997'
+      //  property 'sonar.jdbc.url', 'jdbc:mysql://argalephdockerci2:3307/sonar'
+        //property 'sonar.jdbc.driverClassName', 'com.mysql.jdbc.Driver'
+       // property 'sonar.jdbc.username', 'sonar'
+        //property 'sonar.jdbc.password', '123qwe'
+    //}
+//}

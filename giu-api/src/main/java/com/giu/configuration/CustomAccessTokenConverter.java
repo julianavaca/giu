@@ -1,6 +1,5 @@
-package com.turner.configuration;
+package com.giu.configuration;
 
-import com.turner.filter.EnterpriseContext;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
@@ -22,13 +21,11 @@ public class CustomAccessTokenConverter extends DefaultAccessTokenConverter {
 
     public OAuth2Authentication extractAuthentication(Map<String, ?> map) {
         return getAuth(
-                Optional.ofNullable(super.extractAuthentication(map)),
-                Optional.ofNullable(EnterpriseContext.getEnterprise()));
+                Optional.ofNullable(super.extractAuthentication(map)));
     }
 
     private OAuth2Authentication getAuth(
-            Optional<OAuth2Authentication> currentAuth,
-            Optional<Long> enterprise) {
+            Optional<OAuth2Authentication> currentAuth) {
 
         OAuth2Authentication auth = currentAuth.get();
         Collection<GrantedAuthority> authorities = auth.getAuthorities();
@@ -37,15 +34,13 @@ public class CustomAccessTokenConverter extends DefaultAccessTokenConverter {
                 new UsernamePasswordAuthenticationToken(
                         auth.getPrincipal(),
                         auth.getCredentials(),
-                        getAuthorities(authorities, enterprise.orElse(getDefaultEnterprise(authorities)))));
+                        getAuthorities(authorities)));
     }
 
     private Collection<? extends GrantedAuthority> getAuthorities(
-            Collection<GrantedAuthority> authorities,
-            Long enterprise) {
+            Collection<GrantedAuthority> authorities) {
         return authorities
                 .stream()
-                .filter(it -> enterprise.equals(extractEnterprise(it)))
                 .map(it -> extractRole(it.getAuthority()))
                 .collect(Collectors.toSet());
     }
@@ -55,11 +50,4 @@ public class CustomAccessTokenConverter extends DefaultAccessTokenConverter {
         return new SimpleGrantedAuthority(String.format(ROLE_FORMAT, content.split("-")[1]));
     }
 
-    private Long extractEnterprise(GrantedAuthority authority) {
-        return Long.parseLong(authority.getAuthority().replaceAll(ROLE_REPLACEMENT, "").split("-")[0]);
-    }
-
-    private Long getDefaultEnterprise(Collection<GrantedAuthority> authorities) {
-        return extractEnterprise(authorities.stream().findFirst().get());
-    }
 }

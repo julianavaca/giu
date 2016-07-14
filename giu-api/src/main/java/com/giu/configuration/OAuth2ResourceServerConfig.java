@@ -1,10 +1,5 @@
-package com.turner.configuration;
+package com.giu.configuration;
 
-import com.turner.filter.AlephEnterpriseFilter;
-import com.turner.filter.AlephUserDBFilter;
-import com.turner.filter.CORSFilter;
-import com.turner.renderer.CustomDefaultOAuth2ExceptionRenderer;
-import io.aleph.rest.template.filter.TraceabilityFilter;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.cloud.context.config.annotation.RefreshScope;
 import org.springframework.context.annotation.Bean;
@@ -47,10 +42,6 @@ public class OAuth2ResourceServerConfig extends ResourceServerConfigurerAdapter 
     @Override
     public void configure(HttpSecurity http) throws Exception {
 
-        http.addFilterBefore(new CORSFilter(), AbstractPreAuthenticatedProcessingFilter.class);
-        http.addFilterAfter(loggingFilter(), CORSFilter.class);
-        http.addFilterBefore(alephEnterpriseFilter(), CORSFilter.class);
-        http.addFilterAfter(alephUserDBFilter(), CORSFilter.class);
         http.addFilterAfter(new OncePerRequestFilter() {
             @Override
             protected void doFilterInternal(HttpServletRequest request,
@@ -66,8 +57,6 @@ public class OAuth2ResourceServerConfig extends ResourceServerConfigurerAdapter 
         }, AbstractPreAuthenticatedProcessingFilter.class);
         http.csrf().disable();
 
-        HttpAuthoritiesSetter.addAuthorities(http);
-
     }
 
     @Bean
@@ -79,35 +68,19 @@ public class OAuth2ResourceServerConfig extends ResourceServerConfigurerAdapter 
     public RemoteTokenServices remoteTokenServices() {
         final RemoteTokenServices remoteTokenServices = new RemoteTokenServices();
         remoteTokenServices.setCheckTokenEndpointUrl(tokenEndpointUrl);
-        remoteTokenServices.setClientId("media");
-        remoteTokenServices.setClientSecret("media");
+        remoteTokenServices.setClientId("giu");
+        remoteTokenServices.setClientSecret("giu");
         remoteTokenServices.setAccessTokenConverter(accessTokenConverter());
         return remoteTokenServices;
     }
 
-    @Bean
-    public Filter loggingFilter() {
-        return new TraceabilityFilter();
-    }
-
-    @Bean
-    public Filter alephEnterpriseFilter(){
-        return new AlephEnterpriseFilter();
-    }
-
-    @Bean
-    public Filter alephUserDBFilter(){
-            return new AlephUserDBFilter();
-    }
-
-
-    @Value("${aleph.oauth.uri}")
+    @Value("${giu.oauth.uri}")
     private String oauthHost;
 
     @Override
     public void configure(ResourceServerSecurityConfigurer resources) throws Exception {
         OAuth2AuthenticationEntryPoint ep = new OAuth2AuthenticationEntryPoint();
-        ep.setExceptionRenderer(new CustomDefaultOAuth2ExceptionRenderer(oauthHost));
+        //ep.setExceptionRenderer(new CustomDefaultOAuth2ExceptionRenderer(oauthHost));
         resources.authenticationEntryPoint(ep);
     }
 

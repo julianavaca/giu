@@ -1,4 +1,4 @@
-package com.turner.configuration;
+package com.giu.configuration;
 
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.access.expression.method.MethodSecurityExpressionHandler;

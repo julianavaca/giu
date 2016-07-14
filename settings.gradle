@@ -1,7 +1,4 @@
-rootProject.name = 'aleph-media'
-
-//include ":aleph-framework"
-//project(":aleph-framework").projectDir = file("../aleph-framework")
+rootProject.name = 'giu'
 
 //Spring boot web - REST Api micro-service
-include 'aleph-media-api'
+include 'giu-api'
